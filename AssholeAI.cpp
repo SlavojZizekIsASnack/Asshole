@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+<<<<<<< HEAD
     int Ace = 1;
     int Two = 2;
     int Three = 3;
@@ -30,3 +31,7 @@ int main(){
     Middel >= 4 < 8;
     Høj >= 9; 
 }
+=======
+    
+}
+>>>>>>> 09785ddfb92d4ea29b22ffa8803812a27388a06b
