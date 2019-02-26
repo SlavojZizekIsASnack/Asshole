@@ -1,37 +1,26 @@
-#include <iostream>
-#include <cstring>
+    Ace = 1
+    Two = 2
+    Three = 3
+    Four = 4
+    Five = 5
+    Six = 6
+    Seven = 7
+    Eight = 8
+    Nine = 9
+    Ten = 10
+    Jacks = 11
+    Queens = 1
+    Kings = 13
 
-using namespace std;
+    Lav = None
+    Middel = None
+    Høj = None
 
-int main(){
-<<<<<<< HEAD
-    int Ace = 1;
-    int Two = 2;
-    int Three = 3;
-    int Four = 4;
-    int Five = 5;
-    int Six = 6;
-    int Seven = 7;
-    int Eight = 8;
-    int Nine = 9;
-    int Ten = 10;
-    int Jacks = 11;
-    int Queens = 12;
-    int Kings = 13;
+    CurrentCard = None
 
-    int Lav;
-    int Middel;
-    int Høj;
+    CardsInDeck = None
 
-    int CurrentCard;
+    Lav < 3
+    Middel >= 4 < 8
+    Høj >= 9 
 
-    int CardsInDeck;
-
-    Lav < 3;
-    Middel >= 4 < 8;
-    Høj >= 9; 
-}
-=======
-    
-}
->>>>>>> 09785ddfb92d4ea29b22ffa8803812a27388a06b
