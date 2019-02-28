@@ -1,5 +1,0 @@
-\babel@toc {danish}{}
-\contentsline {section}{\numberline {1}Abstract}{2}% 
-\contentsline {section}{\numberline {2}Problemformulering}{2}% 
-\contentsline {section}{\numberline {3}Funktionsbeskrivelse}{3}% 
-\contentsline {section}{\numberline {4}Dokumentation}{4}% 
