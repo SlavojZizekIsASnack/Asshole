@@ -1,1 +1,358 @@
+\documentclass[12pt]{article}
+\usepackage[danish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{minted}
+\usepackage{forest}
+
+\begin{document}
+
+\begin{titlepage}
+
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+	\center
+
+	%---------------------------------------------------------------------------
+	%	HEADING SECTIONS
+	%---------------------------------------------------------------------------
+
+	\textsc{\LARGE Learnmark Horsens}\\[1.5cm] % Name of your university/college
+	\textsc{\Large Programering C}\\[0.5cm] % Major heading such as course name
+	\textsc{\large 2. MFI}\\[0.5cm] % Minor heading such as course title
+
+	%---------------------------------------------------------------------------
+	%	TITLE SECTION
+	%---------------------------------------------------------------------------
+
+	\HRule \\[0.4cm]
+	{ \huge \bfseries Rogue-like i Rust}\\[0.4cm]
+	\HRule \\[1.5cm]
+
+	%---------------------------------------------------------------------------
+	%	AUTHOR SECTION
+	%---------------------------------------------------------------------------
+
+	\Large \emph{Skrevet af:}\\
+	Konrad \textsc{Christensen}\\[3cm]
+
+	\vfill
+
+\end{titlepage}
+
+\pagebreak
+
+%-------------------------------------------------------------------------------
+%	TOC SECTION
+%-------------------------------------------------------------------------------
+
+\tableofcontents
+
+\vfill
+
+\pagebreak
+
+%-------------------------------------------------------------------------------
+%	MAIN SECTION
+%-------------------------------------------------------------------------------
+
+\section{Abstract}
+En rogue-like er et spil hvor man skal spille sig igennem en m\ae ngde af algoritmisk genereret baner genererede ved runtime.
+
+Det var originalt planen at spillet skulle v\ae re synkront som man kender det fra for eksempel Nethack eller lignende rogue-likes. Det vil sige at spillet venter mellem ens tr\ae k p\aa\ ens n\ae ste tr\ae k og derfor ikke har nogle passive aktioner koerende i baggrunden.
+
+Da jeg overvurderede implementeringstiden af dungeon generatoren har jeg kun n\aa et at implementere den.
+
+\section{Problemformulering}
+
+Problemformulering er her hvordan man kan implementere en effektiv dungeon generator der kan generere dungeons ved runtime uden at skabe un\o dvendig h\o j ventetid p\aa\ at man kan forts\ae tte resten af spillet.
+
+\vfill
+\pagebreak
+
+\section{Funktionsbeskrivelse}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{example_complete.png}
+	\caption{Dungeon genereret med kommandoen: \mintinline{shell}{maizena -c 50 -r 60}}
+\end{figure}
+
+
+Funktionsbeskrivelsen af dette program er meget simpelt, da der ikke endu er blevet tilfoejet nogen interaktiv del.
+
+Lige nu giver kommandoen: \mintinline{shell}{maizena --help}
+
+dette resultat:
+
+\begin{minted}{text}
+	USAGE:
+	    maizena [OPTIONS]
+
+	FLAGS:
+	    -h, --help       Prints help information
+	    -V, --version    Prints version information
+
+	OPTIONS:
+		-r, --rooms <AMOUNT>    Tries to place <AMOUNT> of
+					rooms [default: 15]
+		-c, --chance <PERCENT>  How curvy maze should be
+					[0-100] [default: 30]
+\end{minted}
+
+Alts\aa\ har vi to parametre vi kan justere p\aa:
+
+\begin{enumerate}
+	\item -{}-rooms Hvor vi kan justere m\ae ngden af vaerelser
+	\item -{}-chance Hvor vi kan justere hvor krumme gangene i dungeonet er
+\end{enumerate}
+
+\vfill
+\pagebreak
+
+\section{Dokumentation}
+
+Dette Rust projekt har et Module tr\ae\ der ser s\aa ledes ud:
+
+\begin{forest}
+	for tree={
+	font=\ttfamily,
+	grow'=0,
+	child anchor=west,
+	parent anchor=south,
+	anchor=west,
+	calign=first,
+	edge path={
+			\noexpand\path [draw, \forestoption{edge}]
+			(!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+		},
+	before typesetting nodes={
+			if n=1
+				{insert before={[,phantom]}}
+				{}
+		},
+	fit=band,
+	before computing xy={l=15pt},
+	}
+	[maizena
+		[game
+				[dungeon
+						[maze]
+						[rooms]
+				]
+		]
+		[tools
+				[direction]
+				[point]
+				[rectangle]
+				[tile]
+		]
+	]
+\end{forest}
+
+Hvor game er f\o lgende struct:
+
+\begin{minted}{rust}
+pub struct Game {
+    pub dungeon: Dungeon,
+}
+
+impl Game {
+	/// Print dungeon to io::Stdout
+	pub fn print(&mut self);
+}
+\end{minted}
+
+med f\o lgende associative funktion
+
+\begin{minted}{rust}
+pub fn build(size: (usize, usize), rooms: usize, same_dir_chance: usize)
+	-> Game
+\end{minted}
+
+\newpage
+
+Det struct Game indeholder er den prim\ae re struct i denne dungeon generator. Selve Dungeon structet ser s\aa ledes ud:
+
+\begin{minted}{rust}
+pub struct Dungeon {
+    rng: SmallRng,
+    world: DMatrix<Tile>,
+    area: Rectangle,
+}
+\end{minted}
+
+Hvor:
+\begin{enumerate}
+	\item[\textbf{rng}:] Er en seeded wrapper omkring en PRNG algoritme.
+	\item[\textbf{world}:] Er en 2D matrix der indeholder Tile strukturen omkring selve dungeonet.
+	\item[\textbf{area}:] Er en lille struct der indeholder st\o rrelsen p\aa dungeonet og flere funktioner relateret til kollisioner mellem andre geometriske former og punkter(Point).
+\end{enumerate}
+
+Processen til at skabe et dungeon er delt op i fire funktioner:
+
+\begin{enumerate}
+	\item \mintinline{rust}{let rooms = self.rooms(rooms)}
+	\item \mintinline{rust}{self.maze(same_dir_chance)}
+	\item \mintinline{rust}{self.connect_rooms(rooms)}
+	\item \mintinline{rust}{self.trim()}
+\end{enumerate}
+
+\vfill
+\pagebreak
+
+\subsection{Skabelse af rum}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{example_rooms.png}
+	\caption{self.world efter funktion 1. \mintinline{rust}{let rooms = self.rooms(rooms);}}
+\end{figure}
+
+Denne funktion er meget simpel. Funktionen placer \textit{n} antal rum tilf\ae ldigt p\aa\ banen. Dog er der det tvist at rummene skal starte i et ulige punkt p\aa\ banen og at b\aa de l\ae ngde dimensionen og bredde dimensionen skal v\ae re ulige.
+
+\begin{minted}{rust}
+let rooms = Vec<Rectangle>;
+for _ in 0..n {
+    let room = rectangle::new(random_odd_position(), random_odd_size());
+    let mut overlaps = false;
+    for r in rooms.iter() {
+        if r.overlaps(&room) {
+            overlaps = true;
+            break;
+        }
+    }
+    if !overlaps && self.draw_room(&room) {
+        rooms.push(room);
+    }
+}
+\end{minted}
+
+\subsection{Til\o jelse af labyrint}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{example_maze.png}
+	\caption{self.world efter funktion 1. og 2. \mintinline{rust}{self.maze(same_dir_chance)}}
+\end{figure}
+
+2. stadie er hvor selve labyrinten bygges. Labyrinten bliver bygget over hele banen mellem rummene. Metoden her kan deles op i to dele. En hvor vi finder ud af hvilke punkter der skal startes en labyrint fra og en hvor vi bygger en labyrint fra punktet. For at finde ud af hvilke punkter der skal bygges en labyrint fra looper vi igennem hvert andet punkt og vi starter fra 1. Det g\o r vi med denne funktion:
+
+\begin{minted}{rust}
+for x in (1..self.area.size.x).step_by(2) {
+    for y in (1..self.area.size.y).step_by(2) {
+		//snip
+    }
+}
+\end{minted}
+
+For hvert ulige punkt fundet sorterer vi igen nogle punkter fra, dem der allerede er lavet et rum p\aa\ eller dem hvor der allerede findes en labyrint.
+
+\begin{minted}{rust}
+let pos = (x, y);
+if self.world[pos] != Tile::Floor {
+    self.grow_maze(point::new(pos), same_direction_chance);
+}
+\end{minted}
+
+Anden del lyder p\aa\ at vi bygger en labyrint strimmel. Overordnet lyder funktionen p\aa\ at vi f\aa r et start punkt, der altid er ulige:
+\begin{minted}{rust}
+fn grow_maze(&mut self, pos: Point, same_direction_chance: usize)
+\end{minted}
+
+herefter finder vi en r\ae kke af punkter det er muligt at "rejse" til. Alle disse rejsepunkter skal ogs\aa\ v\ae re ulige. Vi skal alts\aa\ rejse to punkter. I f\o lgende figur skal vi forestille os at X er startpunktet og at v\ae r kasse er mulige koordinater at rejse til. En kasse med et F i er en kasse der allerede er fyldt.
+
+\begin{verbatim}
+	-------
+	| |F| |
+	-------
+	|.|X|F|
+	-------
+	| |.| |
+	-------
+\end{verbatim}
+
+Vi kan her se at vi kan rejse til to retninger: \textit{syd} og \textit{vest}. Vi kan fors\ae tte med at rejse indtil der ikke er nogle ledige kasser tilbage. N\aa r dette sker stopper vi loopet og vi f\aa r et nyt start koordinat.
+
+\vfill
+\pagebreak
+
+\subsection{Forbindelse mellem rum og labyrint}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{example_connection.png}
+	\caption{self.world efter funktion 1., 2. og 3. \mintinline{rust}{self.maze.connect_rooms()}}
+\end{figure}
+
+I funktion 3. forbinder vi rummene til de nyskabte rum. Dette g\oe r vi ved at loope igennem alle rummene hvorefter vi finder de steder det er muligt at lave en forbindelse. I n\ae ste tegning er R en rum tile F en labyrint tile og 1,2,3 er kanten rundt om rummene.
+
+\begin{verbatim}
+	-------
+	|F|1|R|
+	-------
+	| |2|R|
+	-------
+	|F|3|R|
+	-------
+\end{verbatim}
+
+Af de tre punkter rundt om rummet er det kun 1 og 3 der er mulige forbindelser til omverdenen. Vi er kun interesserede i en forbindelse til labyrinten s\aa vi \ae ndrer kun et tilf\ae ldigt punkt.
+\\
+\begin{verbatim}
+	-------
+	|F| |R|
+	-------
+	| | |R|
+	-------
+	|F|F|R|
+	-------
+\end{verbatim}
+
+
+\subsection{Trimming af blinde veje}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{example_normal_complete.png}
+	\caption{self.world efter funktion 1., 2., 3. og 4. \mintinline{rust}{self.maze.trim()}}
+\end{figure}
+
+Det sidste punkt er at trimme blinde veje. Det g\o r vi ved at loope alle punkter igennem med samme kriterier for en blind vej som i funktion 2. Efter de blinde veje er fundet sletter vi punkter fra den labyrint streg indtil vi m\o der et punkt med mere end et andet punkts for bindelse. For eksempel vil vi ved denne situation rykke til F fra X og derefter slette F.
+\\
+\\
+\\
+\\
+\begin{verbatim}
+	-------
+	| |.| |
+	-------
+	|.|X|F|
+	-------
+	| |.| |
+	-------
+\end{verbatim}
+
+Derimod ville vi ved denne situation hverken slette X eller F:
+
+\begin{verbatim}
+	-------
+	| |.| |
+	-------
+	|.|X|F|
+	-------
+	| |F| |
+	-------
+\end{verbatim}
+
+\section{Test af program}
+
+I aktion producere denne teknik, uanset indstillingen, sn\o rklede, komplicerede og un\o dvendigt lange gange. Vores hypotese om dette er at det sker fordi forbindelsen mellem rummene er skabt uden nogen retning og alts\aa tilf\ae ldigt st\o der sammen.
+
+Dog er denne generator meget hurtig og kan hvis kompilieret med kommandoen \mintinline{shell}{cargo build --release} og opt.level = 3 kan k\o rere genereringen 5050 gange p\aa\ $24.216s$. Alts\aa\ $4,795ms$ per iteration.
+
+\section{Konklusion}
+
+Problemstillingen er nogenlunde noget. Generatoren er meget hurtig men de dungeons den generere er supoptimale.
+
+\end{document}
 
