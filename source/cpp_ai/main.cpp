@@ -1,4 +1,4 @@
-extern "C" int multiply(int a)
+extern "C" int tick(int a)
 {
 	return a * 3;
 }
