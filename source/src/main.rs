@@ -7,9 +7,9 @@ use card::*;
 fn main() {
 	let c = Card::new(Face::Queen, Suit::Hearts);
 
-	println!("{}", unsafe { tick(10) });
+	println!("{}", unsafe { tick(c) });
 }
 
 extern "C" {
-	fn tick(a: libc::c_int) -> libc::c_int;
+	fn tick(a: Card) -> Suit;
 }

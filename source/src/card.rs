@@ -1,7 +1,7 @@
 use strum::IntoEnumIterator;
 
 #[repr(C)]
-#[derive(Clone, Copy, EnumIter, Display)]
+#[derive(Clone, Copy, EnumIter, Display, PartialEq, Eq)]
 pub enum Face {
 	Ace,
 	Two,
@@ -19,7 +19,7 @@ pub enum Face {
 }
 
 #[repr(C)]
-#[derive(Clone, Copy, EnumIter, Display)]
+#[derive(Clone, Copy, EnumIter, Display, PartialEq, Eq)]
 pub enum Suit {
 	Diamonds,
 	Clubs,
