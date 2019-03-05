@@ -14,7 +14,7 @@ enum Face
 	Queen,
 	King,
 };
-
+ 
 enum Suit
 {
 	Diamonds,
