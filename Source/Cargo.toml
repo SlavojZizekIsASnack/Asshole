@@ -1,0 +1,11 @@
+[package]
+name = "game"
+version = "0.1.0"
+authors = ["Konrad Fabrtius Christensen <a>"]
+edition = "2018"
+
+[dependencies]
+strum = "0.13.0"
+strum_macros = "0.13.0"
+
+libc = "0.2.49"
