@@ -1,7 +1,7 @@
 use strum::IntoEnumIterator;
 
 #[repr(C)]
-#[derive(Clone, Copy, EnumIter, Display, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, EnumIter, Display, PartialEq, Eq)]
 pub enum Face {
 	Ace,
 	Two,
@@ -19,7 +19,7 @@ pub enum Face {
 }
 
 #[repr(C)]
-#[derive(Clone, Copy, EnumIter, Display, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, EnumIter, Display, PartialEq, Eq)]
 pub enum Suit {
 	Diamonds,
 	Clubs,
@@ -27,7 +27,7 @@ pub enum Suit {
 	Spades,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Card {
 	face: Face,
 	suit: Suit,

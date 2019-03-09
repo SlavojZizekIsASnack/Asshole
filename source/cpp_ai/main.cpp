@@ -29,8 +29,7 @@ struct Card
 	Suit suit;
 };
 
-extern "C" Suit
-tick(Card d)
+extern "C" Suit find_suit(Card d)
 {
 	return d.suit;
 }
