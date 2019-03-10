@@ -27,6 +27,7 @@ pub enum Suit {
 	Spades,
 }
 
+#[repr(C)]
 #[derive(Clone, Debug)]
 pub struct Card {
 	face: Face,

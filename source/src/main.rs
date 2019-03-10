@@ -10,11 +10,16 @@ use card::*;
 fn main() {
 	let mut rng = thread_rng();
 
-	let d = Card::deck().shuffle(&mut rng);
+	let mut deck = Card::deck();
+	deck.shuffle(&mut rng);
 
-	println!("{:#?}", Card::deck());
+	println!("{:#?}", tick_safe(&mut deck));
 }
 
 extern "C" {
-	fn find_suit(a: Card) -> Suit;
+	fn tick(ptr: *mut Card, len: libc::size_t) -> Card;
+}
+
+fn tick_safe(deck: &mut Vec<Card>) -> Card {
+	unsafe { tick(deck.as_mut_ptr(), deck.len()) }
 }

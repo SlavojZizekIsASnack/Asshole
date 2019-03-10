@@ -1,3 +1,5 @@
+#include <vector>
+
 enum Face
 {
 	Ace,
@@ -14,7 +16,7 @@ enum Face
 	Queen,
 	King,
 };
- 
+
 enum Suit
 {
 	Diamonds,
@@ -29,7 +31,10 @@ struct Card
 	Suit suit;
 };
 
-extern "C" Suit find_suit(Card d)
+extern "C" Card tick(Card *ptr, size_t len)
 {
-	return d.suit;
+	std::vector<Card> ss;
+	ss.assign(ptr, ptr + len);
+
+	return ss[3];
 }
