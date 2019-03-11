@@ -2,8 +2,6 @@
 
 enum Face
 {
-	Ace,
-	Two,
 	Three,
 	Four,
 	Five,
@@ -15,6 +13,8 @@ enum Face
 	Jack,
 	Queen,
 	King,
+	Ace,
+	Two,
 };
 
 enum Suit

@@ -1,13 +1,12 @@
 #[macro_use]
 extern crate strum_macros;
 
-use rand::seq::SliceRandom;
-use rand::thread_rng;
-
 mod card;
 use card::*;
 
 fn main() {
+	use rand::seq::SliceRandom;
+	use rand::thread_rng;
 	let mut rng = thread_rng();
 
 	let mut deck = Card::deck();
