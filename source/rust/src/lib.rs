@@ -1,1 +1,2 @@
-use game_lib::*;
+mod simple;
+pub use simple::Simple;

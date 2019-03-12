@@ -1,3 +1,9 @@
 use game_lib::card::*;
 
-fn main() {}
+
+fn main() {
+	use rand::	
+	
+	let deck = Card::deck();
+
+}
