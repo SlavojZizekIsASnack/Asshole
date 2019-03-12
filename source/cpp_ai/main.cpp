@@ -1,5 +1,7 @@
 #include <vector>
 
+using namespace std;
+
 enum Face
 {
 	Three,
@@ -33,7 +35,7 @@ struct Card
 
 extern "C" Card tick(Card *ptr, size_t len)
 {
-	std::vector<Card> ss;
+	vector<Card> ss;
 	ss.assign(ptr, ptr + len);
 
 	return ss[3];
