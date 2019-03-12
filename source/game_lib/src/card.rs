@@ -6,7 +6,6 @@ pub enum PlayType {
 	Single,
 	Double,
 	Triple,
-	Quadruple,
 	Clear,
 }
 
