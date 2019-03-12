@@ -25,6 +25,15 @@ enum Suit
 	Spades,
 };
 
+enum PlayType
+{
+	Single,
+	Double,
+	Triple,
+	Quadruple,
+	Clear,
+};
+
 struct Card
 {
 	Face face;
