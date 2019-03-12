@@ -1,7 +1,7 @@
 use game_lib::card::*;
 use game_lib::Player;
 
-struct Simple {}
+pub struct Simple;
 
 extern "C" {
 	fn play_simple(

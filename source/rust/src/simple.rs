@@ -1,7 +1,7 @@
 use game_lib::card::*;
 use game_lib::Player;
 
-pub struct Simple {}
+pub struct Simple;
 
 impl Player for Simple {
 	fn new() -> Simple {
