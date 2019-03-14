@@ -1,6 +1,8 @@
 \documentclass[12pt]{article}
 \usepackage[danish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true, linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{minted}
 
 \begin{document}
 
@@ -56,9 +58,9 @@
 
 \section{Abstract}
 
-Igennem denne opgave har vi arbejdet med at lave kortspillet "Røvhul", samt vi har arbejdet med at lave to AI's som er i stand til at spille spillet, på den mest optimale måde. Opgaven vil gå i gennem vores begrundelse for projektet i sektionen "Problemformulering", samt hvad vores plan at gøre med selve projektet,og hvordan vi i grove træk tænker det skal gøres.
+Igennem denne opgave har vi arbejdet med at lave kortspillet "Røvhul", samt vi har arbejdet med at lave to AI's som er i stand til at spille spillet, på den mest optimale måde. Opgaven vil gå i gennem vores begrundelse for projektet i sektionen "\hyperref[sec:Problemformulering]{Problemformulering}", samt hvad vores plan at gøre med selve projektet,og hvordan vi i grove træk tænker det skal gøres.
 \\
-Derefter vil opgaven komme ind på hvordan de forskellige funktioner i programmerne fungere sammen med eksempler på hvordan de kan bruges. Der vil i kapitlet "Dokumentation", også blive snakket om hvordan projektet fungere, ud over de forskellige funktioner som bliver brugt. Efter følgende vil vi så konkludere om det er lykkes at opfylde vores krav til det fuldente program resultat, som vi satte som mål i problemformuleringen.
+Derefter vil opgaven komme ind på hvordan de forskellige funktioner i programmerne fungere sammen med eksempler på hvordan de kan bruges. Der vil i kapitlet "\hyperref[sec:Dokumentation]{Dokumentation}", også blive snakket om hvordan projektet fungere, ud over de forskellige funktioner som bliver brugt. Efter følgende vil vi så \hyperref[sec:Konklusion]{konkludere} om det er lykkes at opfylde vores krav til det fuldente program resultat, som vi satte som mål i problemformuleringen.
 
 \section{Problemformulering} \label{sec:Problemformulering}
 
@@ -69,7 +71,9 @@ For at kunne dette skal vi foerst lave en implementering af Roevhul og derefter 
 \vfill
 \pagebreak
 
-\section{Dokumentation}
+\section{Dokumentation} \label{sec:Dokumentation}
+For at kunne få Rust og C++ til at arbejde sammen, bruger vi C Foreign Function Interface (FFI), hvilket gør det muligt at kalde C kode/funktioner i andre programmeringssprog
+
 \subsection{Rust}
 
 \subsection{C++}
@@ -78,7 +82,7 @@ For at kunne dette skal vi foerst lave en implementering af Roevhul og derefter 
 \vfill
 \pagebreak
 
-\section{Konklusion}
+\section{Konklusion} \label{sec:Konklusion}
 
 \vfill
 \pagebreak
