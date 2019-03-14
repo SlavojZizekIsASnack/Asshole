@@ -4,7 +4,7 @@ use game_lib::Player;
 pub struct Simple;
 
 impl Player for Simple {
-	fn new() -> Simple {
+	fn new() -> Self {
 		Simple {}
 	}
 
