@@ -8,22 +8,13 @@ extern "C" {
 		deck_ptr: *mut Card,
 		deck_len: libc::size_t,
 		play_type: PlayType,
-		pile_ptr: *mut Card,
-		pile_len: libc::size_t,
+		last_card: Card,
 	) -> Card;
 }
 
 impl Player for Simple {
-	fn play(mut deck: Vec<Card>, play_type: PlayType, mut pile: Vec<Card>) -> Card {
-		unsafe {
-			play_simple(
-				deck.as_mut_ptr(),
-				deck.len(),
-				play_type,
-				pile.as_mut_ptr(),
-				pile.len(),
-			)
-		}
+	fn play(mut deck: Vec<Card>, play_type: PlayType, last_card: Card) -> Card {
+		unsafe { play_simple(deck.as_mut_ptr(), deck.len(), play_type, last_card) }
 	}
 
 	fn new() -> Self {

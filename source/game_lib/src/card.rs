@@ -19,12 +19,12 @@ pub enum Face {
 	Seven,
 	Eight,
 	Nine,
-	Ten,
 	Jack,
 	Queen,
 	King,
 	Ace,
 	Two,
+	Ten,
 }
 
 #[repr(C)]
