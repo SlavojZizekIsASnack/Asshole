@@ -41,7 +41,7 @@ enum PlayType
 	Clear,
 };
 
-extern "C" Card tick(Card *deck_ptr, size_t deck_len, PlayType play_type, Card *pile_ptr, size_t pile_len)
+extern "C" Card tick(Card *deck_ptr, size_t deck_len, PlayType play_type, Card last_card)
 {
 	vector<Card> deck;
 	deck.assign(deck_ptr, deck_ptr + deck_len);
@@ -51,3 +51,5 @@ extern "C" Card tick(Card *deck_ptr, size_t deck_len, PlayType play_type, Card *
 
 	return deck[0];
 }
+
+
