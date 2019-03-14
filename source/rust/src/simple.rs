@@ -8,7 +8,7 @@ impl Player for Simple {
 		Simple {}
 	}
 
-	fn play(hand: Vec<Card>, play_type: PlayType, pile: Vec<Card>) -> Card {
+	fn play(hand: Vec<Card>, play_type: PlayType, last_card: Card) -> Card {
 		hand[0]
 	}
 }

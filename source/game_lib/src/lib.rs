@@ -5,6 +5,6 @@ pub mod card;
 use card::*;
 
 pub trait Player {
-    fn play(hand: Vec<Card>, play_type: PlayType, pile: Vec<Card>) -> Card;
+    fn play(hand: Vec<Card>, play_type: PlayType, last_card: Card) -> Card;
     fn new() -> Self;
 }
