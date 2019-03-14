@@ -1,5 +1,7 @@
 #include <vector>
 
+using namespace std;
+
 enum Face
 {
 	Three,
@@ -41,10 +43,10 @@ enum PlayType
 
 extern "C" Card tick(Card *deck_ptr, size_t deck_len, PlayType play_type, Card *pile_ptr, size_t pile_len)
 {
-	std::vector<Card> deck;
+	vector<Card> deck;
 	deck.assign(deck_ptr, deck_ptr + deck_len);
 
-	std::vector<Card> pile;
+	vector<Card> pile;
 	deck.assign(pile_ptr, pile_ptr + pile_len);
 
 	return deck[0];
