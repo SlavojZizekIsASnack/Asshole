@@ -6,5 +6,9 @@ use card::*;
 
 pub trait Player {
     fn play(hand: Vec<Card>, play_type: PlayType, last_card: Card) -> Card;
-    fn new() -> Player;
+    fn new() -> Box<Player>;
+}
+
+struct Game {
+    players: Vec<Box<dyn Player>>,
 }
