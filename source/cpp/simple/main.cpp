@@ -46,10 +46,7 @@ extern "C" Card tick(Card *deck_ptr, size_t deck_len, PlayType play_type, Card l
 	vector<Card> deck;
 	deck.assign(deck_ptr, deck_ptr + deck_len);
 
-	vector<Card> pile;
-	deck.assign(pile_ptr, pile_ptr + pile_len);
-
 	return deck[0];
+
+
 }
-
-

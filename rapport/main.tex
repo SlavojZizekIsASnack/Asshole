@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[a4paper, 12pt]{article}
 \usepackage[danish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{pygmentex}
@@ -81,7 +81,22 @@ For at kunne dette skal vi foerst lave en implementering af Roevhul og derefter 
 \vfill
 \pagebreak
 
-\section{Dokumentation}
+\section{Dokumentation}{
+\begin{figure}[H]
+	\centering
+	\input{Diagram1.tex}
+	\caption{Diagram over selve spillet samt loopet, som tjekker om der er flere kort der kan spilles}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{Diagram2.tex}
+	\caption{Diagram over loop som står for at næste spiller får sin tur, samt at trækkene er valide}
+\end{figure}
+
+\vfill
+\pagebreak
+
 \subsection{Rust}
 
 \subsection{C++}
