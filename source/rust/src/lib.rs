@@ -1,2 +1,1 @@
-mod simple;
-pub use simple::Simple;
+pub mod simple;
