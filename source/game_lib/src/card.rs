@@ -50,15 +50,21 @@ impl Card {
 
 	// Return a Vec<Card> of size 52
 	pub fn deck() -> Vec<Card> {
-		use rand::seq::SliceRandom;
-		use rand::thread_rng;
-
 		let mut deck = Vec::with_capacity(52);
 		for suit in Suit::iter() {
 			for face in Face::iter() {
 				deck.push(Card::new(face, suit))
 			}
 		}
+
+		deck
+	}
+
+	pub fn shuffled_deck() -> Vec<Card> {
+		use rand::seq::SliceRandom;
+		use rand::thread_rng;
+
+		let mut deck = Self::deck();
 		let mut rng = thread_rng();
 		deck.shuffle(&mut rng);
 

@@ -261,4 +261,6 @@ TSWLatexianTemp*
 
 */target/*
 
+*/.vscode/*
+
 *.pdf

@@ -1,6 +1,6 @@
 fn main() {
     cc::Build::new()
-        .file("simple/main.cpp")
+        .file("simple/simple.cpp")
         .cpp(true)
-        .compile("libassholeai.a");
+        .compile("simple.a");
 }

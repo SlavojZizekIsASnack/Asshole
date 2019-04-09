@@ -5,10 +5,46 @@ pub mod card;
 use card::*;
 
 pub trait Player {
-    fn play(hand: Vec<Card>, play_type: PlayType, last_card: Card) -> Card;
-    fn new() -> Box<Player>;
+	fn tick(&mut self, play_type: PlayType, last_card: Card) -> Card;
+	fn set_hand(&mut self, hand: Vec<Card>);
+	fn mut_hand(&mut self) -> &mut Vec<Card>;
+	fn get_hand(&self) -> &Vec<Card>;
 }
 
-struct Game {
-    players: Vec<Box<dyn Player>>,
+pub struct Game {
+	pub players: Vec<Box<Player>>,
+	pub pile: Vec<Card>,
+}
+
+impl Game {
+	// Creates a Game, create and shuffle deck, and split deck off.
+	pub fn new(mut players: Vec<Box<Player>>) -> Self {
+		// Creates a shuffled deck.
+		let mut deck = Card::shuffled_deck();
+
+		// Size of player decks
+		let player_deck_size = deck.len() / players.len();
+
+		// Give player their deck and sort their deck.
+		for player in &mut players {
+			let mut deck = deck.split_off(deck.len() - player_deck_size);
+			deck.sort();
+			player.set_hand(deck);
+		}
+
+		// Return game struct.
+		Game {
+			players,
+			pile: vec![],
+		}
+	}
+
+	// Iteraters
+	pub fn tick(&mut self) {
+		for (i, player) in self.players.iter_mut().enumerate() {
+			let play = player.tick(PlayType::Clear, Card::new(Face::Three, Suit::Diamonds));
+			println!("Player {} played '{}'", i, play)
+		}
+		println!("One turn played");
+	}
 }
