@@ -2,10 +2,11 @@ use game_lib::Game;
 
 fn main() {
 	let mut g = Game::new(vec![
-		cpp::simple::play,
-		rust::simple::play,
-		cpp::simple::play,
+		rust::Simple::new(),
+		cpp::Simple::new(),
+		cpp::Simple::new(),
 	]);
 
+	g.tick();
 	g.tick();
 }

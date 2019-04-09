@@ -41,10 +41,10 @@ enum PlayType
 	Clear,
 };
 
-extern "C" Card play_unsafe(Card *deck_ptr, size_t deck_len, PlayType play_type, Card last_card)
+extern "C" Card tick_unsafe(Card *hand_ptr, size_t hand_len, PlayType play_type, Card last_card)
 {
-	vector<Card> deck;
-	deck.assign(deck_ptr, deck_ptr + deck_len);
+	vector<Card> hand;
+	hand.assign(hand_ptr, hand_ptr + hand_len);
 
-	return deck[0];
+	return hand[0];
 }
