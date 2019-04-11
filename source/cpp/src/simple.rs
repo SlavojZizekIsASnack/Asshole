@@ -36,7 +36,7 @@ impl Player for Simple {
 		self.hand = hand;
 	}
 
-	fn mut_hand(&mut self) -> &mut Vec<Card> {
+	fn get_mut_hand(&mut self) -> &mut Vec<Card> {
 		&mut self.hand
 	}
 
