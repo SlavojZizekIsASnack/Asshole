@@ -103,19 +103,25 @@ Diagram 2, er en visualisering over det loop som står for at næste spiller få
 
 
 \subsection{Reglerne}
-I spillet røvhul er der mange regler som gør at forskellige strategier kan have sin fordel i forskellige scenarier. For eksempel, når man starter et spil, så spilleren som har klør 3, er den spiller som starter. Den der starter behøves dog ikke at smide klør 3, da det kan være smartere at lave et træk som gør at man kan komme af med flere kort på en gang. Andre regler er for eksempel
+Reglerne i røvhul er forholdsvist simple, men de skaber muglighed for et rigt og advanceret strategisk kortspil.
+De forskellige regler betyder at forskellige strategier kan have sine fordel i forskellige scenarier. 
+Der er et par forskellige reglsæt og der kan til tider være uenigheder om enkelte regler. Vi har derfor defineret det reglset som vi har lavet spillet ud fra.
 
 \begin{itemize}
-	\item Rydde bunken
-	\item Pas eller at skippe runden
-	\item Højere eller lig med sidst lagte kort
+	\item Målet i røvhul er at spille alle sine kort så man har nul kort tilbage i hånden.
+	\item Den første person som har spillet alle sine kort og vinder spillet bliver kåret præsident. Den spiller som sidst har kort i hånden bliver kåret røvhul. Yderligere hvis mere end 3 spillere spiller på en gang bliver den anden første og anden sidste henholdsvist kåret visepræsident og viserøvhul.
+	\item I første spil er det spilleren med klør tre som starter, dog behøver de ikke spille klør tre i første runde. I følgende spil er det røvhullet fra det tidligere spil som starter.
+	\item Hver spiller skiftes til at ligge et kort ned på toppen af bunken i urets retning. Kortet man ligger ned skal altid være lig med eller højere end det øverste kort i bunken. 
+	\item Det højeste kort er to efterfulgt af es, konge osv. ned til tre. Det gælder dog ikke 10 som ryder bunken og derfor er højere end to.
+	\item Når bunken rydes kasseres alle kort i bunken og spillet fortsætter. Det er altid den spiller som sidst har lagt et kort i bunken som starter med at ligge et kort.
+	\item Hvis der ikke er nogle kort i bunken må man spille et hvilket som helst kort. Yderligere er det tiladt at ligge to eller flere af det samme kort eks. to konger eller tre es. Hvis to eller flere kort bliver lagt i bunken på denne måde skal alle følgende spillere ligge den samme mængde kort på bunken som også er ens og er lig med eller højere.
+	\item Hvis to spiller ligger to ens kort i streg er det ikke tiladt at den tredje spiller ligger to ens kort i bunken.
+	\item Hvis der på noget tidspunkt ligger fire ens kort i streg i bunken rydes bunken.
+	\item Hvis man ikke kan, eller ikke vil spille et kort er det tiladt at sige pas, men hvis en spiller siger pas og bliver sprunget over vil de automatisk blive sprunget over ind til den nuværende bunke rydes.
+	\item Når man begynder et spil efter det første spil eller efterfulgte spil er afsluttede skal røvhullet give sine to bedste/højeste kort hvor ti er højest så to, es osv til præsidenten. Præsidenten skal derefter give to af sine kort til røvhullet og præsidenten må selv vælge hvilke to kort de giver. Alle kort gives med bagsiden opad. Hvis man spiller visepræsident og -røvhul gælder samme regl for dem, dog bytter de kun et kort. 
 \end{itemize}
 
-Når man ryder bunken vil den eksisterende bunke blive lagt til side og et nyt kort lægges af den der sidst har lagt et kort. Bunken i vores udgave af "Røvhul" kan rydes af 10'ere, ved at 4 ens kort er blevet lagt i streg, eller ved at alle har sagt pas. Hvis det sker at der ikke kan lægges flere kort i bunken da ingen spillere kan lægge et kort, vil spillerene blive tvunget til at sige pas, og bunken vil blive ryddet.
-
-Når en spiller siger pas, vælger spilleren at de først kan lægge et kort igen når bunken er blevet ryddet. Det betyder at hvis en spiller har en 2 som de ikke kan ligge, og dermed siger pas. Og hvis de så kan lægge den næste gang rækkefølgen kommer til dem, så må de ikke lægge kortet da bunken ikke er blevet ryddet endnu.
-
-Spillerene må kun lægge kort der enten er lig med den øverste kort i bunken eller kort som er højere end det øverste kort i bunken.
+Vi har analyseret regelerne og udvalgt enkelte regeler som vi føler ikke vil passe ind i en digitalisering af spiller. For det første giver det ikke mening at rækkefølgen af spillere er givet ud fra hvordan man sidder rundt om et bord. Derfor har vi i valgt at tilfældigt lave rækkefølgen før spillet starter og derved simulere ture rundt om et bord. Da der kun er tre spillere med i spillet spiller vi ikke med visepræsident og -røvhul reglen.
 
 \subsection{Rust}
 
