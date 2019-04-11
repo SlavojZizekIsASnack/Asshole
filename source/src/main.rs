@@ -8,5 +8,4 @@ fn main() {
 	]);
 
 	g.tick();
-	g.tick();
 }

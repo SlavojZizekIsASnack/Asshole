@@ -46,11 +46,5 @@ extern "C" Card tick_unsafe(Card *hand_ptr, size_t hand_len, PlayType play_type,
 	vector<Card> hand;
 	hand.assign(hand_ptr, hand_ptr + hand_len);
 
-<<<<<<< HEAD:source/cpp/simple/main.cpp
-	return deck[0];
-
-
-=======
 	return hand[0];
->>>>>>> master:source/cpp/simple/simple.cpp
 }
