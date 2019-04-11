@@ -8,22 +8,29 @@
 
 \usetikzlibrary{shapes.geometric, arrows}
 
+\usepackage [style=danish]{csquotes}
+\MakeOuterQuote{"}
+
+\usepackage{svg}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+
 
 \begin{document}
 
 \begin{titlepage}
-
 	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-
 	\center
 
 	%---------------------------------------------------------------------------
 	%	HEADING SECTIONS
 	%---------------------------------------------------------------------------
 
-	\textsc{\LARGE Learnmark Horsens}\\[1.5cm] % Name of your university/college
-	\textsc{\Large Programering C}\\[0.5cm] % Major heading such as course name
-	\textsc{\large 2. MFI}\\[0.5cm] % Minor heading such as course title
+	\begin{figure}[h]
+		\centering
+		\includesvg[width=0.75\linewidth]{learnmark}
+		\\[1cm]
+	\end{figure}
 
 	%---------------------------------------------------------------------------
 	%	TITLE SECTION
@@ -31,12 +38,21 @@
 
 	\HRule \\[0.4cm]
 	{ \huge \bfseries Røvhul}\\[0.4cm]
-	\HRule \\[1.5cm]
+	\HRule \\[0.4cm]
+
+	%----------------------------------------------------------------------------
+	%	DETAIL SECTION
+	%----------------------------------------------------------------------------
+
+	\textsc{\Large Programmering C.}\\[0.5cm]
+	\textsc{\large 2. MFI}\\[0.5cm]
 
 	%---------------------------------------------------------------------------
 	%	AUTHOR SECTION
 	%---------------------------------------------------------------------------
 
+	\vfill 
+	
 	\Large \emph{Skrevet af:}\\
 	Konrad \textsc{Christensen}\\
 	Marcus \textsc{Langfeldt}\\
