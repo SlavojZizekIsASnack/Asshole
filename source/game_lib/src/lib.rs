@@ -7,7 +7,7 @@ use card::*;
 pub trait Player {
 	fn tick(&mut self, play_type: PlayType, last_card: Card) -> Card;
 	fn set_hand(&mut self, hand: Vec<Card>);
-	fn mut_hand(&mut self) -> &mut Vec<Card>;
+	fn get_mut_hand(&mut self) -> &mut Vec<Card>;
 	fn get_hand(&self) -> &Vec<Card>;
 }
 
@@ -39,12 +39,19 @@ impl Game {
 		}
 	}
 
-	// Iteraters
-	pub fn tick(&mut self) {
+	pub fn tick(&mut self) -> Result<(), TickError> {
 		for (i, player) in self.players.iter_mut().enumerate() {
 			let play = player.tick(PlayType::Clear, Card::new(Face::Three, Suit::Diamonds));
+
 			println!("Player {} played '{}'", i, play)
 		}
 		println!("One turn played");
+
+		Ok(())
 	}
+}
+
+pub enum TickError {
+	IllegalMove,
+	NoneExistingCard,
 }
