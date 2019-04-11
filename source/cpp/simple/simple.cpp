@@ -47,8 +47,4 @@ extern "C" Card tick_unsafe(Card *hand_ptr, size_t hand_len, PlayType play_type,
 	hand.assign(hand_ptr, hand_ptr + hand_len);
 
 	return hand[0];
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
