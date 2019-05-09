@@ -2,10 +2,19 @@ use game_lib::Game;
 
 fn main() {
 	let mut g = Game::new(vec![
-		rust::Simple::new(),
-		cpp::Simple::new(),
-		cpp::Simple::new(),
+		rust::Big::new("Big1"),
+		rust::Big::new("Big2"),
+		rust::Big::new("Big3"),
 	]);
 
-	g.tick();
+	loop {
+		use game_lib::TickError::*;
+		match g.tick() {
+			Err(GameOver(winner)) => {
+				println!("\n{} won!", winner);
+				break;
+			}
+			_ => continue,
+		};
+	}
 }

@@ -1,3 +1,4 @@
+use std::cmp::Ordering;
 use strum::IntoEnumIterator;
 
 #[repr(C)]
@@ -6,6 +7,7 @@ pub enum PlayType {
 	Single,
 	Double,
 	Triple,
+	Quadruple,
 	Clear,
 }
 
@@ -37,10 +39,10 @@ pub enum Suit {
 }
 
 #[repr(C)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Clone, Copy)]
 pub struct Card {
-	face: Face,
-	suit: Suit,
+	pub face: Face,
+	pub suit: Suit,
 }
 
 impl Card {
@@ -77,3 +79,27 @@ impl std::fmt::Display for Card {
 		write!(f, "{} of {}", self.face, self.suit)
 	}
 }
+
+// Suit doesn't matter for ordering. They're always the same
+impl PartialOrd for Card {
+	fn partial_cmp(&self, other: &Card) -> Option<Ordering> {
+		self.face.partial_cmp(&other.face)
+	}
+}
+
+// Suit doesn't matter for ordering. They're always the same
+impl Ord for Card {
+	fn cmp(&self, other: &Card) -> Ordering {
+		self.face.cmp(&other.face)
+	}
+}
+
+// Suit doesn't matter for equality testing. They're always the same
+impl PartialEq for Card {
+	fn eq(&self, other: &Card) -> bool {
+		self.face.eq(&other.face)
+	}
+}
+
+// Suit doesn't matter for equality testing. They're always the same
+impl Eq for Card {}
