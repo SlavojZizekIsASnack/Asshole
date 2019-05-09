@@ -64,9 +64,11 @@
 
 \section{Abstract}
 
-Igennem denne opgave har vi arbejdet med at lave kortspillet "Røvhul", samt vi har arbejdet med at lave to AI's som er i stand til at spille spillet, på den mest optimale måde. Opgaven vil gå i gennem vores begrundelse for projektet i sektionen "Problemformulering", samt hvad vores plan at gøre med selve projektet,og hvordan vi i grove træk tænker det skal gøres.
+Igennem denne opgave har vi arbejdet med at lave kortspillet "Røvhul". Til spillet har vi identificeret 3 strategier hvortil vi har lavet 3 forskellige AI’s som hver følger deres strategi. Ud fra det har vi identificere hvilken af de 3 strategier der er bedst. Opgaven vil gå i gennem vores begrundelse for projektet i sektionen "Problemformulering", samt vores plan for selve projektet, og vores tre strategier til at spille spillet.
 \bigbreak
-Derefter vil opgaven komme ind på hvordan de forskellige funktioner i programmerne fungere sammen med eksempler på hvordan de kan bruges. Der vil i kapitlet "Dokumentation", også blive snakket om hvordan projektet fungere, ud over de forskellige funktioner som bliver brugt. Efter følgende vil vi så konkludere om det er lykkes at opfylde vores krav til det fuldente program resultat, som vi satte som mål i problemformuleringen.
+Derefter vil vi i kapitlet "Dokumentation" komme ind på eksempler fra koden og forklare hvordan forskellige funktioner i koden fungerer og hvordan de bliver brugt. Vi vil også i dokumentationen beskrive hvordan de tre AI's er udført i koden. 
+\bigbreak
+Til sidst vil vi konkludere om det er lykkes at opfylde vores krav til det fuldente program resultat, som vi satte som mål i problemformuleringen, og hvilken af vores AI's der er bedst til at spille spillet.
 
 \section{Problemformulering}
 
@@ -78,8 +80,7 @@ For at kunne dette skal vi først lave en implementering af Røvhul og derefter 
 \pagebreak
 
 \section{Dokumentation}
-Selve kortspils delen af projektet er lavet i Rust, hvor af spillets regler også er implementeret. For at undgå at de forskellige AI's overholder reglerne, er der også blevet implementeret en funktion som skal tjekke om de forskelle træk som bliver lavet er lovlige. Og hvis de ikke er vil spil delen bede den specifikke AI om at lave et nyt træk.
-Vi har valgt at lave de forskellige AI's i Rust og C++,
+Selve kortspils delen af projektet er lavet i Rust, hvor af spillets regler også er implementeret. For at undgå at de forskellige AI's overholder reglerne, er der også blevet implementeret en funktion som skal tjekke om de forskellige træk som bliver lavet er lovlige. Og hvis de ikke er lovlige, så vil spillet bede den AI som lavede det ulovlige træk, om at lave et nyt træk, i et håb om at det så er et lovligt træk.Vi har valgt at lave de forskellige AI's i Rust og C++. Neden under er der et digrammer over hvordan spillet fungere, samt også et diagram over hvordan de forskellige AI's fungere samt at der bliver tjekket trækket som AI'en laver er et validt træk.
 
 \begin{figure}[H]
 	\centering
@@ -103,8 +104,8 @@ Diagram 2, er en visualisering over det loop som står for at næste spiller få
 
 
 \subsection{Reglerne}
-Reglerne i røvhul er forholdsvist simple, men de skaber muglighed for et rigt og advanceret strategisk kortspil.
-De forskellige regler betyder at forskellige strategier kan have sine fordel i forskellige scenarier. 
+Reglerne i røvhul er forholdsvist simple, men de skaber muglighed for et rigt og advanceret strategisk kortspil, hvor man ofte er nød til at nare sin modstander til at tro noget, så man kan få dem til at hjælpe en med at afslutte sin egen hånd så man kan vinde.
+Det at der er forskeliige regler betyder at forskellige strategier, som hver kan have sine fordele og ulemper i forskellige scenarier. 
 Der er et par forskellige reglsæt og der kan til tider være uenigheder om enkelte regler. Vi har derfor defineret det reglset som vi har lavet spillet ud fra.
 
 \begin{itemize}
