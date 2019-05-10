@@ -65,11 +65,15 @@
 
 \section{Abstract}
 
-Igennem denne opgave har vi arbejdet med at lave kortspillet "Røvhul". Til spillet har vi identificeret 3 strategier hvortil vi har lavet 3 forskellige AI’s som hver følger deres strategi. Ud fra det har vi identificere hvilken af de 3 strategier der er bedst. Opgaven vil gå i gennem vores begrundelse for projektet i sektionen "Problemformulering", samt vores plan for selve projektet, og vores tre strategier til at spille spillet.
+Igennem denne opgave har vi arbejdet med at lave kortspillet "Røvhul". Til spillet har vi lavet et program som kan hjælpe brugere med at finde den bedste strategi til spillet bladt allerede opstillede strategier. 
+
+I forbindelse med det har vi selv identificeret 2 strategier hvortil vi har lavet 2 forskellige bots som hver følger deres strategi. Ud fra det konkluderer vi så hvilken strategi der er bedst.
+
+Opgaven vil gå i gennem vores begrundelse for projektet i sektionen "Problemstilling", hvorefter vi forklare vores plan for selve projektet, samt de regler vi har valgt at programmere spillet ud fra i sektionen "Problemanalyse". 
 \bigbreak
-Derefter vil vi i kapitlet "Dokumentation" komme ind på eksempler fra koden og forklare hvordan forskellige funktioner i koden fungerer og hvordan de bliver brugt. Vi vil også i dokumentationen beskrive hvordan de tre AI's er udført i koden. 
+Derefter gennemgår vi brugsvejledningen til programmet i sektionen "Vejledning til Programmet"
 \bigbreak
-Til sidst vil vi konkludere om det er lykkes at opfylde vores krav til det fuldente program resultat, som vi satte som mål i problemformuleringen, og hvilken af vores AI's der er bedst til at spille spillet.
+Til sidst vil vi i kapitlet "Dokumentation" komme ind på eksempler fra koden og forklare hvordan forskellige funktioner i koden fungerer og hvordan de bliver brugt. Vi vil også i dokumentationen beskrive hvordan de tre bots er udført i koden. Hvorefter vi vil teste koden med vores bots. 
 
 \section{Problemstilling}
 
@@ -77,15 +81,15 @@ Der er i den moderne verden ikke nogen måde på effektivt at teste hvor god ens
 
 Vores mål er derfor at lave en løsning der lader brugere som har opstille en strategi til spillet røvhul, teste deres strategi.
 
-
+\section{Problemanalyse}
 
 Vi har fundet to mulige løsninger til vores proble. Den første ville være at spille en masse spil i hånden med sin valgte strategi. Den anden ville være et computerprogram som spiller den valgte strategi for en. Vi har valgt at arbejde videre med den anden løsning da en kode baseret løsning ville kunne spille spil markant hurdigere end hvis man spillede i hånden. Det giver stører datasæt og derfor bedrer hviser hvor god ens strategi er.
 
-Til at agere spillere i vores kode baserede røvhul vil vi benytte AI'er eller robotter som programmeres til at følge en valgt strategi.
+Til at agere spillere i vores kode baserede røvhul vil vi benytte bots eller robotter som programmeres til at følge en valgt strategi.
 
-Vores valgte løsning er derfor et program, som lader brugeren teste strategier i røvhul ved hjælp af AI'er som vi lader spille mod sig selv og ud fra det, se hvilken strategi klare sig bedst.
+Vores valgte løsning er derfor et program, som lader brugeren teste strategier i røvhul ved hjælp af bots som vi lader spille mod sig selv og ud fra det, se hvilken strategi klare sig bedst.
 
-Til dette skal vi først lave en version af røvhul som AI'erne kan spille, da spillet normalt kun findes som kortspil. 
+Til dette skal vi først lave en version af røvhul som robotterne kan spille, da spillet normalt kun findes som kortspil. 
 
 \subsection{Reglerne til Røvhul}
 For at lave vores egen version af røvhul skal vi først opstille de regler spillet er baseret på.
@@ -105,6 +109,7 @@ Der er et par forskellige reglsæt og der kan til tider være uenigheder om enke
 	\item Hvis man ikke kan, eller ikke vil spille et kort er det tiladt at sige pas, men hvis en spiller siger pas og bliver sprunget over vil de automatisk blive sprunget over ind til den nuværende bunke rydes.
 	\item Når man begynder et spil efter det første spil eller efterfulgte spil er afsluttede skal røvhullet give sine to bedste/højeste kort hvor ti er højest så to, es osv til præsidenten. Præsidenten skal derefter give to af sine kort til røvhullet og præsidenten må selv vælge hvilke to kort de giver. Alle kort gives med bagsiden opad. Hvis man spiller vicepræsident og -røvhul gælder samme regl for dem, dog bytter de kun et kort. 
 \end{itemize}
+\bigbreak
 
 Vi har analyseret regelerne og udvalgt enkelte regeler som vi føler ikke vil passe ind i en digitalisering af spiller. For det første giver det ikke mening at rækkefølgen af spillere er givet ud fra hvordan man sidder rundt om et bord. Derfor har vi i valgt at tilfældigt lave rækkefølgen før spillet starter og derved simulere ture rundt om et bord. Da der kun er tre spillere med i spillet spiller vi ikke med vicepræsident og -røvhul reglen.
 Ud over det har vi også valgt at kassere klør tre reglen da den normalt kun bruges til at finde ud af hvem der starter den første runde, men da vi allerede har en rækkefølge kan vi ligeså godt bruge den.
@@ -113,7 +118,7 @@ Ud over det har vi også valgt at kassere klør tre reglen da den normalt kun br
 \pagebreak
 
 \subsection{Flowcharts}
-Vist under er et digram over spillets game loop, samt et diagram over hvordan der bliver tjekket om trækket som AI'en laver er et validt træk.
+Vist under er et digram over spillets game loop, samt et diagram over hvordan der bliver tjekket om trækket som botten laver er et validt træk.
 \begin{figure}[H]
 	\centering
 	\resizebox{.5\linewidth}{!}{\input{Diagram1.tex}}
@@ -131,11 +136,9 @@ Diagram 1, er en visualisering over selve spillet samt loopet, som tjekker om de
 
 Diagram 2, er en visualisering over det loop som står for at næste spiller får sin tur, samt at trækkene er valide.
 
-\section{Vejledning til programmet}
+\section{Vejledning til Programmet}
 
-Før man bruger programmet skal man først have opstillet en strategi til røvhul som man vil teste i forhold til andre stragegier. 
-
-
+Før man bruger programmet skal man først have opstillet en strategi til røvhul som man vil teste i forhold til andre stragegier. Derefter programmeres en bot til at bruge den valgte strategi. Det kunne f.eks. være altid at spille det mindste kort på hånden. Derefter linkes alle de botter som man vil teste til røvhul programmet som kører et forudbestemt antal gange, hvorefter det udskriver i en konsol hvormange hver bot vant et spil.
 
 \vfill
 \pagebreak
@@ -174,11 +177,22 @@ fn main() {
 \pagebreak
 
 \section{Afprøvning}
+
+
+
+
+
+
+
+
+
+
+
 Ud over at teste strategierne mod hinanden valgte vi også at teste strategier mod sig selv, og gennem det fandt vi frem til at når alle spillere forsøger at smide så mange kort på en gang, så vil den der starter bunken 47\% af tiden, mens den som starter som nummer to i rækkefølgen har en chance for at vinde, som er på 32,7\%, og den der er nummer 3 har en chance for at vinde på 25\%. 
 Og tallene som er nævnt oven for er fra hvor man har kørt progammet 10.000.000 gange, så man har så mange simuleringer som muligt, det er dog muligt at køre flere simuleringer, men da det tager 30 sekunder at køre 10.000.000 simuleringer, bedømmede vi at det ikke var nødvendigt at teste flere gange.
 
 \section{Konklusion}
-Vi har gennem udviklingen af projektet fundet nogle ting som vi vil gøre anderledes, så som at skrive det hele i det samme programmeringssprog, da vi på den nuværende måde er bundet til hvad FFI er i stand til. Så hvis vi skulle lave det igen, vil vi have lavet det i Rust, hvor vi vil have brugt funktionen double linked list, så vi vil have været i stand til at tage data ud af listen, uanset hvor i listen den data, som man skulle bruge lå. I den nuværende udgave har vi i stedet for linked list brugt vektore, hvor vi mere er låst til kun at tage data ud af vektoren så længe dataen lægger som det første i vektoren.
+Vi har gennem udviklingen af projektet fundet nogle ting som vi vil gøre anderledes, så som at skrive det hele i det samme programmeringssprog, da vi på den nuværende måde er bundet til hvad FFI er i stand til. Så hvis vi skulle lave det igen, vil vi have lavet det hele i Rust, hvor vi vil have brugt funktionen double linked list, så vi vil have været i stand til at tage data ud af listen, uanset hvor i listen den data, som man skulle bruge lå. I den nuværende udgave har vi i stedet for linked list brugt vektore, hvor vi mere er låst til kun at tage data ud af vektoren så længe dataen lægger som det første i vektoren.
 
 \bigbreak
 
