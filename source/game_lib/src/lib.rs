@@ -66,7 +66,7 @@ impl Game {
 				if self.passes >= number_of_players + 1 {
 					self.passes = 0;
 					self.top_card = None;
-					self.play_type = PlayType::Double;
+					self.play_type = PlayType::Clear;
 				}
 
 				// Ask player for their move
@@ -96,6 +96,12 @@ impl Game {
 				// If no cards played, pass.
 				if play.len() == 0 {
 					self.passes += 1;
+
+					// Update for progress. Prints in the format:
+					//     `{name} passed on a {play_type}`
+					// e.g `Big1 passed on a 'Double'`
+					// println!("{} passed on a '{:?}'", player.get_name(), self.play_type);
+
 					continue;
 				}
 
@@ -106,8 +112,11 @@ impl Game {
 						PlayType::Single => 1,
 						PlayType::Double => 2,
 						PlayType::Triple => 3,
+						PlayType::Quadruple => {
+							cleared_board = true;
+							4
+						}
 						PlayType::Clear => unreachable!(),
-						_ => unreachable!(),
 					} {
 					return Err(WrongNumberOfCards);
 				}
@@ -115,12 +124,12 @@ impl Game {
 				// Update for progress. Prints in the format:
 				//     `{name} played {number of} '{card}'`
 				// e.g `Big1 played 1 'Queen'`
-				println!(
-					"{} played {} '{}'",
-					player.get_name(),
-					play.len(),
-					player.get_hand()[play[0] as usize].face
-				);
+				// println!(
+				// 	"{} played {} '{}'",
+				// 	player.get_name(),
+				// 	play.len(),
+				// 	player.get_hand()[play[0] as usize].face
+				// );
 
 				// Ten clears the board
 				if player.get_hand()[play[0] as usize].face == Face::Ten {
@@ -140,13 +149,14 @@ impl Game {
 				}
 
 				// If the player didn't clear the board, the turn falls to the next guy.
-				if cleared_board == false {
-					break;
+				if cleared_board == true {
+					self.passes = 0;
+					self.top_card = None;
+					self.play_type = PlayType::Clear;
+					continue;
 				}
 
-				self.passes = 0;
-				self.top_card = None;
-				self.play_type = PlayType::Clear;
+				break;
 			}
 		}
 		// println!();
