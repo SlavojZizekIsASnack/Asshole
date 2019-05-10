@@ -2,7 +2,7 @@
 \usepackage[danish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{pdftexcmds}
-\usepackage{minted}
+\usepackage[cache=false]{minted}
 \usepackage{tikz}
 \usepackage{parskip}
 \usepackage{tocloft}
@@ -126,21 +126,21 @@ Vist under er der et digrammer over spillets game loop, samt et diagram over hvo
 
 \begin{figure}[H]
 	\centering
-	\input{Diagram1.tex}[width=0.5\linewidth]
+	\input{Diagram1.tex}[width=20mm]
 	\caption{Diagram 1}
 \end{figure}
-
-\begin{figure}[H]
-	\centering
-	\input{Diagram2.tex}[width=0.5\linewidth]
-	\caption{Diagram 2}
-\end{figure}
-
 Diagram 1, er en visualisering over selve spillet samt loopet, som tjekker om der er flere kort der kan spilles.
 \bigbreak
 
-Diagram 2, er en visualisering over det loop som står for at næste spiller får sin tur, samt at trækkene er valide.
+\begin{figure}[H]
+	\centering
+	\input{Diagram2.tex}[width=20mm]
+	\caption{Diagram 2}
+\end{figure}
 
+
+
+Diagram 2, er en visualisering over det loop som står for at næste spiller får sin tur, samt at trækkene er valide.
 \vfill
 \pagebreak
 
