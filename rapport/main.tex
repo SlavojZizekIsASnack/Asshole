@@ -2,7 +2,7 @@
 \usepackage[danish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{pdftexcmds}
-\usepackage[cache=false]{minted}
+\usepackage{minted}
 \usepackage{tikz}
 \usepackage{parskip}
 \usepackage{tocloft}
@@ -67,75 +67,80 @@
 
 \section{Abstract}
 
-Igennem denne opgave har vi arbejdet med at lave kortspillet "Røvhul". Til spillet har vi identificeret 3 strategier hvortil vi har lavet 3 forskellige AI’s som hver følger deres strategi. Ud fra det har vi identificere hvilken af de 3 strategier der er bedst. Opgaven vil gå i gennem vores begrundelse for projektet i sektionen "Problemformulering", samt vores plan for selve projektet, og vores tre strategier til at spille spillet.
+Igennem denne opgave har vi arbejdet med kortspillet "Røvhul". Til spillet har vi lavet et program som kan hjælpe brugere med at finde den bedste strategi til spillet i forhold til allerede opstillede strategier. 
+
+I forbindelse med det har vi selv identificeret 2 strategier hvortil vi har lavet 2 forskellige bots som hver følger deres strategi. Ud fra det konkluderer vi så hvilken strategi der er bedst.
+
+Opgaven vil gå igennem vores begrundelse for projektet i sektionen "Problemstilling", hvorefter vi forklare vores plan for selve projektet, samt de regler vi har valgt at programmere spillet ud fra i sektionen "Problemanalyse". 
 \bigbreak
-Derefter vil vi i kapitlet "Dokumentation" komme ind på eksempler fra koden og forklare hvordan forskellige funktioner i koden fungerer og hvordan de bliver brugt. Vi vil også i dokumentationen beskrive hvordan de tre AI's er udført i koden. 
+Derefter gennemgår vi brugsvejledningen til programmet i sektionen "Vejledning til Programmet"
 \bigbreak
-Til sidst vil vi konkludere om det er lykkes at opfylde vores krav til det fuldente program resultat, som vi satte som mål i problemformuleringen, og hvilken af vores AI's der er bedst til at spille spillet.
+Til sidst vil vi i kapitlet "Dokumentation" komme ind på eksempler fra koden og forklare hvordan forskellige funktioner i koden fungerer og hvordan de bliver brugt. Vi vil også i dokumentationen beskrive hvordan de tre bots er udført i koden. Hvorefter vi vil teste koden med vores bots i "Afprøvning". 
 
 \section{Problemstilling}
 
-Der er i den moderne verden ikke nogen måde på effektivt at teste hvor god ens strategi til kortspillet røvhul er. Vi vil derfor udvikle en metode til at hurdigt og effektivt teste hvor god en strategi i røvhul er i forhold til andre strategier.
+Der er i den moderne verden ikke nogen måde på effektivt at teste hvor god ens strategi til kortspillet røvhul er. Vi vil derfor udvikle en metode til at hurtigt og effektivt teste hvor god en strategi i røvhul er i forhold til andre strategier.
 
 Vores mål er derfor at lave en løsning der lader brugere som har opstille en strategi til spillet røvhul, teste deres strategi.
 
+\section{Problemanalyse}
 
+Vi har fundet to mulige løsninger til vores problem. Den første ville være at spille en masse spil i hånden med sin valgte strategi. Den anden ville være et computerprogram som spiller den valgte strategi for en. Vi har valgt at arbejde videre med den anden løsning da en kode baseret løsning ville kunne spille spil markant hurtigere end hvis man spillede i hånden. Det giver stører datasæt og derfor bedrer viser hvor god ens strategi er.
 
-Vi har fundet to mulige løsninger til vores proble. Den første ville være at spille en masse spil i hånden med sin valgte strategi. Den anden ville være et computerprogram som spiller den valgte strategi for en. Vi har valgt at arbejde videre med den anden løsning da en kode baseret løsning ville kunne spille spil markant hurdigere end hvis man spillede i hånden. Det giver stører datasæt og derfor bedrer hviser hvor god ens strategi er.
+Til at agere spillere i vores kode baserede røvhul vil vi benytte bots eller robotter som programmeres til at følge en valgt strategi.
 
-Til at agere spillere i vores kode baserede røvhul vil vi benytte AI'er eller robotter som programmeres til at følge en valgt strategi.
+Vores valgte løsning er derfor et program, som lader brugeren teste strategier i røvhul ved hjælp af bots som vi lader spille mod sig selv og ud fra det, se hvilken strategi klare sig bedst.
 
-Vores valgte løsning er derfor et program, som lader brugeren teste strategier i røvhul ved hjælp af AI'er som vi lader spille mod sig selv og ud fra det, se hvilken strategi klare sig bedst.
-
-Til dette skal vi først lave en version af røvhul som AI'erne kan spille, da spillet normalt kun findes som kortspil. 
+Til dette skal vi først lave en version af røvhul som robotterne kan spille, da spillet normalt kun findes som kortspil. 
 
 \subsection{Reglerne til Røvhul}
 For at lave vores egen version af røvhul skal vi først opstille de regler spillet er baseret på.
 
-Der er et par forskellige reglsæt og der kan til tider være uenigheder om enkelte regler. Vi har derfor defineret det reglset som vi har lavet spillet ud fra.
+Der er et par forskellige regelsæt og der kan til tider være uenigheder om enkelte regler. Vi har derfor defineret det regelsæt som vi har lavet spillet ud fra.
 
 \begin{itemize}
-	\item Målet i røvhul er at spille alle sine kort så man har nul kort tilbage i hånden.
-	\item Den første person som har spillet alle sine kort og vinder spillet bliver kåret præsident. Den spiller som sidst har kort i hånden bliver kåret røvhul. Yderligere hvis mere end 3 spillere spiller på en gang bliver den anden første og anden sidste henholdsvist kåret vicepræsident og vicerøvhul.
-	\item I første spil er det spilleren med klør tre som starter, dog behøver de ikke spille klør tre i første runde. I følgende spil er det røvhullet fra det tidligere spil som starter.
-	\item Hver spiller skiftes til at ligge et kort ned på toppen af bunken i urets retning. Kortet man ligger ned skal altid være lig med eller højere end det øverste kort i bunken. 
-	\item Det højeste kort er to efterfulgt af es, konge osv. ned til tre. Det gælder dog ikke 10 som ryder bunken og derfor er højere end to.
-	\item Når bunken rydes kasseres alle kort i bunken og spillet fortsætter. Det er altid den spiller som sidst har lagt et kort i bunken som starter med at ligge et kort.
-	\item Hvis der ikke er nogle kort i bunken må man spille et hvilket som helst kort. Yderligere er det tiladt at ligge to eller flere af det samme kort eks. to konger eller tre es. Hvis to eller flere kort bliver lagt i bunken på denne måde skal alle følgende spillere ligge den samme mængde kort på bunken som også er ens og er lig med eller højere.
-	\item Hvis to spiller ligger to ens kort i streg er det ikke tiladt at den tredje spiller ligger to ens kort i bunken.
-	\item Hvis der på noget tidspunkt ligger fire ens kort i streg i bunken rydes bunken.
-	\item Hvis man ikke kan, eller ikke vil spille et kort er det tiladt at sige pas, men hvis en spiller siger pas og bliver sprunget over vil de automatisk blive sprunget over ind til den nuværende bunke rydes.
-	\item Når man begynder et spil efter det første spil eller efterfulgte spil er afsluttede skal røvhullet give sine to bedste/højeste kort hvor ti er højest så to, es osv til præsidenten. Præsidenten skal derefter give to af sine kort til røvhullet og præsidenten må selv vælge hvilke to kort de giver. Alle kort gives med bagsiden opad. Hvis man spiller vicepræsident og -røvhul gælder samme regl for dem, dog bytter de kun et kort. 
+    \item Målet i røvhul er at spille alle sine kort så man har nul kort tilbage i hånden.
+    \item Den første person som har spillet alle sine kort og vinder spillet bliver kåret præsident. Den spiller som sidst har kort i hånden bliver kåret røvhul. Yderligere hvis mere end 3 spillere spiller på en gang bliver den anden første og anden sidste henholdsvist kåret vicepræsident og vicerøvhul.
+    \item I første spil er det spilleren med klør tre som starter, dog behøver de ikke spille klør tre i første runde. I følgende spil er det røvhullet fra det tidligere spil som starter.
+    \item Hver spiller skiftes til at ligge et kort ned på toppen af bunken i urets retning. Kortet man ligger ned skal altid være lig med eller højere end det øverste kort i bunken. 
+    \item Det højeste kort er to efterfulgt af es, konge osv. ned til tre. Det gælder dog ikke 10 som rydder bunken og derfor er højere end to.
+    \item Når bunken ryddes, kasseres alle kort i bunken og spillet fortsætter. Det er altid den spiller som sidst har lagt et kort i bunken som starter med at lægge et kort.
+    \item Hvis der ikke er nogle kort i bunken må man spille et hvilket som helst kort. Yderligere er det tilladt at ligge to eller flere af det samme kort eks. to konger eller tre es. Hvis to eller flere kort bliver lagt i bunken på denne måde, skal alle følgende spillere lægge den samme mængde kort på bunken som også er ens og er lig med eller højere.
+    \item Hvis to spiller ligger to ens kort i streg er det ikke tilladt at den tredje spiller ligger to ens kort i bunken.
+    \item Hvis der på noget tidspunkt ligger fire ens kort i streg i bunken ryddes bunken.
+    \item Hvis man ikke kan, eller ikke vil spille et kort er det tilladt at sige pas, men hvis en spiller siger pas og bliver sprunget over vil de automatisk blive sprunget over ind til den nuværende bunke ryddes.
+    \item Når man begynder et spil efter det første spil eller efterfulgte spil er afsluttede skal røvhullet give sine to bedste/højeste kort hvor ti er højest så to, es osv. til præsidenten. Præsidenten skal derefter give to af sine kort til røvhullet og præsidenten må selv vælge hvilke to kort de giver. Alle kort gives med bagsiden opad. Hvis man spiller vicepræsident og -røvhul, gælder samme regel for dem, dog bytter de kun et kort. 
 \end{itemize}
+\bigbreak
 
-Vi har analyseret regelerne og udvalgt enkelte regeler som vi føler ikke vil passe ind i en digitalisering af spiller. For det første giver det ikke mening at rækkefølgen af spillere er givet ud fra hvordan man sidder rundt om et bord. Derfor har vi i valgt at tilfældigt lave rækkefølgen før spillet starter og derved simulere ture rundt om et bord. Da der kun er tre spillere med i spillet spiller vi ikke med vicepræsident og -røvhul reglen.
-Ud over det har vi også valgt at kassere klør tre reglen da den normalt kun bruges til at finde ud af hvem der starter den første runde, men da vi allerede har en rækkefølge kan vi ligeså godt bruge den.
+Vi har analyseret reglerne og udvalgt enkelte regler som vi føler ikke vil passe ind i en digitalisering af spiller. For det første giver det ikke mening at rækkefølgen af spillere er givet ud fra hvordan man sidder rundt om et bord. Derfor har vi i valgt at tilfældigt lave rækkefølgen før spillet starter og derved simulere ture rundt om et bord. Da der kun er tre spillere med i spillet, spiller vi ikke med vicepræsident og -røvhulsreglen.
+Ud over det har vi også valgt at kassere klør tre reglen da den normalt kun bruges til at finde ud af hvem der starter den første runde, men da vi allerede har en rækkefølge, kan vi ligeså godt bruge den.
 
 \vfill
 \pagebreak
 
 \subsection{Flowcharts}
-Vist under er et digram over spillets game loop, samt et diagram over hvordan der bliver tjekket om trækket som AI'en laver er et validt træk.
+Vist under er et diagram over spillets game loop, samt et diagram over hvordan der bliver tjekket om trækket som botten laver er et validt træk.
 \begin{figure}[H]
-	\centering
-	\resizebox{.5\linewidth}{!}{\input{Diagram1.tex}}
-	\caption{Diagram 1}
+    \centering
+    \resizebox{.5\linewidth}{!}{\input{Diagram1.tex}}
+    \caption{Diagram 1}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \resizebox{.5\linewidth}{!}{\input{Diagram2.tex}}
+    \caption{Diagram 2}
+\end{figure}
+
 Diagram 1, er en visualisering over selve spillet samt loopet, som tjekker om der er flere kort der kan spilles.
 \bigbreak
 
-\begin{figure}[H]
-	\centering
-	\resizebox{.5\linewidth}{!}{\input{Diagram2.tex}}
-	\caption{Diagram 2}
-\end{figure}
+Diagram 2, er en visualisering over det loop som står for at næste spiller får sin tur, samt at trækkene er valide.
 
+\section{Vejledning til Programmet}
 
-
-\section{Vejledning til programmet}
-
-Før man bruger programmet skal man først have opstillet en strategi til røvhul som man vil teste i forhold til andre stragegier. 
-
+Før man bruger programmet, skal man først have opstillet en strategi til røvhul som man vil teste i forhold til andre strategier. Derefter programmeres en bot til at bruge den valgte strategi. Det kunne f.eks. være altid at spille det mindste kort på hånden. Derefter linkes alle de botter som man vil teste til røvhul programmet som kører et forudbestemt antal gange, hvorefter det udskriver i en konsol hvor mange hver bot vant et spil.
 
 
 \vfill
@@ -177,11 +182,27 @@ fn main() {
 \pagebreak
 
 \section{Afprøvning}
-Ud over at teste strategierne mod hinanden valgte vi også at teste strategier mod sig selv, og gennem det fandt vi frem til at når alle spillere forsøger at smide så mange kort på en gang, så vil den der starter bunken 47\% af tiden, mens den som starter som nummer to i rækkefølgen har en chance for at vinde, som er på 32,7\%, og den der er nummer 3 har en chance for at vinde på 25\%. 
-Og tallene som er nævnt oven for er fra hvor man har kørt progammet 10.000.000 gange, så man har så mange simuleringer som muligt, det er dog muligt at køre flere simuleringer, men da det tager 30 sekunder at køre 10.000.000 simuleringer, bedømmede vi at det ikke var nødvendigt at teste flere gange.
+
+
+
+
+
+
+
+
+
+
+
+Ud over at teste forskellige strategierne mod hinanden valgte vi også at teste strategier mod sig selv. Gennem det fandt vi frem til at når alle spillere spiller den samme strategi, så vil den der starter med at spille et kort først vinde 47\% af tiden, mens den som er nummer to i rækkefølgen, har en chance for at vinde på 32,7\%, og den der er nummer tre, har en chance for at vinde på 25\%. Ud fra det kan vi opstille en ligning som forudsiger hvor stor chancen for at vinde er hvis alle spiller den samme strategi.
+$$\frac{1}{n+1}$$ hvor n er ens nummer i rækkefølgen . 
+
+Tallene som er nævnt oven for, er fra at spillet 10.000.000 runder i streg og burde derfor være forholdsvist præcise. 
 
 \section{Konklusion}
-Vi har gennem udviklingen af projektet fundet nogle ting som vi vil gøre anderledes, så som at skrive det hele i det samme programmeringssprog, da vi på den nuværende måde er bundet til hvad FFI er i stand til. Så hvis vi skulle lave det igen, vil vi have lavet det i Rust, hvor vi vil have brugt funktionen double linked list, så vi vil have været i stand til at tage data ud af listen, uanset hvor i listen den data, som man skulle bruge lå. I den nuværende udgave har vi i stedet for linked list brugt vektore, hvor vi mere er låst til kun at tage data ud af vektoren så længe dataen lægger som det første i vektoren.
+
+
+Vi kan også konkluderer at hvis alle spillere spiller den samme strategi følger chancen for at vinde $\frac{1}{n+1}$ hvor n er ens nummer i rækkefølgen. Det er derfor altid bedst at starte.
+
 
 \bigbreak
 
