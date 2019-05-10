@@ -6,6 +6,7 @@
 \usepackage{tikz}
 \usepackage{parskip}
 \usepackage{tocloft}
+\usepackage{multicol}
 
 \usetikzlibrary{shapes.geometric, arrows}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
@@ -62,6 +63,7 @@
 %-------------------------------------------------------------------------------
 %	MAIN SECTION
 %-------------------------------------------------------------------------------
+\begin{multicols}{2}
 
 \section{Abstract}
 
@@ -142,9 +144,11 @@ Før man bruger programmet skal man først have opstillet en strategi til røvhu
 \section{Dokumentation}
 
 Selve kortspils delen af projektet er lavet i Rust, hvor at spillets regler også er implementeret. For at undgå at de forskellige AIs overholder reglerne, er der også blevet implementeret en funktion som skal tjekke om de forskellige træk som bliver lavet er lovlige. Og hvis de ikke er lovlige, så vil spillet bede den AI som lavede det ulovlige træk, om at lave et nyt træk, i et håb om at det så er et lovligt træk. Vi har valgt at lave de forskellige AI's i Rust og C++.
+\vfill
 
 \subsection{AI strategier}
-
+De strategier som vi har valgt at teste i dette projekt, er at smide så mange kort på en gang, så AI'en får lavet så mange komboer som muligt i hvert træk. Den anden strategi som vi har valgt at teste er at smide et tilfældigt kort, det betyder at det kort som kan blive snit, kan enten være alt mellem det højeste kort og det mindste kort. \\
+Og den sidste strategi som vi valgte at teste af, er at AI'en smider det laveste kort som den har i hånden. 
 
 
 
@@ -181,9 +185,8 @@ Vi har gennem udviklingen af projektet fundet nogle ting som vi vil gøre anderl
 
 \bigbreak
 
-
-
 \vfill
 \pagebreak
 
+\end{multicols}
 \end{document}
