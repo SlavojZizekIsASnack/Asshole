@@ -75,10 +75,11 @@ Opgaven vil gå igennem vores begrundelse for projektet i sektionen "Problemstil
 \bigbreak
 Derefter gennemgår vi brugsvejledningen til programmet i sektionen "Vejledning til Programmet"
 \bigbreak
-Til sidst vil vi i kapitlet "Dokumentation" komme ind på eksempler fra koden og forklare hvordan forskellige funktioner i koden fungerer og hvordan de bliver brugt. Vi vil også i dokumentationen beskrive hvordan de tre bots er udført i koden. Hvorefter vi vil teste koden med vores bots i "Afprøvning". 
+Til sidst vil vi i kapitlet "Dokumentation" komme ind på eksempler fra koden og forklare hvordan forskellige funktioner i koden fungerer og hvordan de bliver brugt. Vi vil også i dokumentationen beskrive hvordan de tre bots er udført i koden. Hvorefter vi vil teste koden med vores bots i "Afprøvning".
+\\
+\\
 
 \section{Problemstilling}
-
 Der er i den moderne verden ikke nogen måde på effektivt at teste hvor god ens strategi til kortspillet røvhul er. Vi vil derfor udvikle en metode til at hurtigt og effektivt teste hvor god en strategi i røvhul er i forhold til andre strategier.
 
 Vores mål er derfor at lave en løsning der lader brugere som har opstille en strategi til spillet røvhul, teste deres strategi.
@@ -116,9 +117,7 @@ Der er et par forskellige regelsæt og der kan til tider være uenigheder om enk
 
 Vi har analyseret reglerne og udvalgt enkelte regler som vi føler ikke vil passe ind i en digitalisering af spiller. For det første giver det ikke mening at rækkefølgen af spillere er givet ud fra hvordan man sidder rundt om et bord. Derfor har vi i valgt at tilfældigt lave rækkefølgen før spillet starter og derved simulere ture rundt om et bord. Da der kun er tre spillere med i spillet, spiller vi ikke med vicepræsident og -røvhulsreglen.
 Ud over det har vi også valgt at kassere klør tre reglen da den normalt kun bruges til at finde ud af hvem der starter den første runde, men da vi allerede har en rækkefølge, kan vi ligeså godt bruge den.
-
 \vfill
-\pagebreak
 
 \subsection{Flowcharts}
 Vist under er et diagram over spillets game loop, samt et diagram over hvordan der bliver tjekket om trækket som botten laver er et validt træk.
@@ -128,24 +127,24 @@ Vist under er et diagram over spillets game loop, samt et diagram over hvordan d
     \caption{Diagram 1}
 \end{figure}
 
+Diagram 1, er en visualisering over selve spillet samt loopet, som tjekker om der er flere kort der kan spilles.
+\bigbreak
+
 \begin{figure}[H]
     \centering
     \resizebox{.5\linewidth}{!}{\input{Diagram2.tex}}
     \caption{Diagram 2}
 \end{figure}
-
-Diagram 1, er en visualisering over selve spillet samt loopet, som tjekker om der er flere kort der kan spilles.
-\bigbreak
-
+\pagebreak
 Diagram 2, er en visualisering over det loop som står for at næste spiller får sin tur, samt at trækkene er valide.
+\\
+\\
 
-\vfill
 \section{Vejledning til Programmet}
 
-Før man bruger programmet, skal man først have opstillet en strategi til røvhul som man vil teste i forhold til andre strategier. Derefter programmeres en bot til at bruge den valgte strategi. Det kunne f.eks. være altid at spille det mindste kort på hånden. Derefter linkes alle de botter som man vil teste til røvhul programmet som kører et forudbestemt antal gange, hvorefter det udskriver i en konsol hvor mange hver bot vant et spil.
+Før man bruger programmet, skal man først have opstillet en strategi til røvhul som man vil teste i forhold til andre strategier. Derefter programmeres en bot til at bruge den valgte strategi. Det kunne f.eks. være altid at spille det mindste kort på hånden. Derefter linkes alle de botter som man vil teste til røvhul programmet som kører et forudbestemt antal gange, hvorefter det udskriver i en konsol hvor mange hver bot vandt et spil.
 
 \vfill
-\pagebreak
 
 \section{Dokumentation}
 
