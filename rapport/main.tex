@@ -5,9 +5,10 @@
 \usepackage{minted}
 \usepackage{tikz}
 \usepackage{parskip}
+\usepackage{tocloft}
 
 \usetikzlibrary{shapes.geometric, arrows}
-
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
 \begin{document}
 
@@ -72,41 +73,32 @@ Til sidst vil vi konkludere om det er lykkes at opfylde vores krav til det fulde
 
 \section{Problemformulering}
 
-Der er mange forskellige strategier i kortspillet Røvhul. Ved at programmere forskellige AI med forskellige strategier kan vi spille dem mod hinanden og finde den bedste strategi.
-\\
-For at kunne dette skal vi først lave en implementering af Røvhul og derefter skal der identificeres og implementeres strategier. Vi forventer at vi med denne metode kan lave en AI der kan vinde over mennesker.
+Der er i den moderne verden ikke nogen måde på effektivt at teste hvor god ens strategi til kortspillet røvhul er. Vi vil derfor udvikle en metode til at hurdigt og effektivt teste hvor god en strategi i røvhul er i forhold til andre strategier.
+
+Målet med vores projekt er at finde den bedste strategi til at spille spillet røvhul ud fra. Vi vil til dette lave mindst 2 AI's som hver er programeret til at bruge en bestemt strategi. Vi lader så AI'erne spille med sig selv og ud fra det vil vi se hvilken strategi klare sig bedst. 
+
+Til dette skal vi først lave en version af røvhul som AI'erne kan spille, da spillet normalt kun findes som kortspil. Derefter skal der identificeres og implementeres strategier.
+
+\subsection{Problem analyse}
+Der er i dag mange som spiller kortspillet røvhul, og mange vil gerne vinde flere spil end dem som de spiller imod. Derfor er det smart at finde ud af hvilken strategi der fungere bedst. Derfor kan man lave et program som tester hvilken af 3 strategier der er bedst at bruge, og da det skal være så almindelige mennesker også kan bruge dem, så er strategierne nogle som man hurtigt kan bruge når man er i gang med spillet.
+
+\section{Vejledning til programmet}
+
+
 
 \vfill
 \pagebreak
 
 \section{Dokumentation}
-Selve kortspils delen af projektet er lavet i Rust, hvor af spillets regler også er implementeret. For at undgå at de forskellige AI's overholder reglerne, er der også blevet implementeret en funktion som skal tjekke om de forskellige træk som bliver lavet er lovlige. Og hvis de ikke er lovlige, så vil spillet bede den AI som lavede det ulovlige træk, om at lave et nyt træk, i et håb om at det så er et lovligt træk.Vi har valgt at lave de forskellige AI's i Rust og C++. Neden under er der et digrammer over hvordan spillet fungere, samt også et diagram over hvordan de forskellige AI's fungere samt at der bliver tjekket trækket som AI'en laver er et validt træk.
 
-\begin{figure}[H]
-	\centering
-	\input{Diagram1.tex}
-	\caption{Diagram 1}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\input{Diagram2.tex}
-	\caption{Diagram 2}
-\end{figure}
-
-Diagram 1, er en visualisering over selve spillet samt loopet, som tjekker om der er flere kort der kan spilles.
-\bigbreak
-
-Diagram 2, er en visualisering over det loop som står for at næste spiller får sin tur, samt at trækkene er valide.
-
-\vfill
-\pagebreak
-
+Til at lave selve spillet skal vi først opstille nogle regler for spillet 
 
 \subsection{Reglerne}
-Reglerne i røvhul er forholdsvist simple, men de skaber muglighed for et rigt og advanceret strategisk kortspil, hvor man ofte er nød til at nare sin modstander til at tro noget, så man kan få dem til at hjælpe en med at afslutte sin egen hånd så man kan vinde.
+Reglerne i røvhul er forholdsvist simple, men de skaber muglighed for et rigt og advanceret strategisk kortspil.
 Det at der er forskeliige regler betyder at forskellige strategier, som hver kan have sine fordele og ulemper i forskellige scenarier. 
 Der er et par forskellige reglsæt og der kan til tider være uenigheder om enkelte regler. Vi har derfor defineret det reglset som vi har lavet spillet ud fra.
+
+
 
 \begin{itemize}
 	\item Målet i røvhul er at spille alle sine kort så man har nul kort tilbage i hånden.
@@ -123,6 +115,35 @@ Der er et par forskellige reglsæt og der kan til tider være uenigheder om enke
 \end{itemize}
 
 Vi har analyseret regelerne og udvalgt enkelte regeler som vi føler ikke vil passe ind i en digitalisering af spiller. For det første giver det ikke mening at rækkefølgen af spillere er givet ud fra hvordan man sidder rundt om et bord. Derfor har vi i valgt at tilfældigt lave rækkefølgen før spillet starter og derved simulere ture rundt om et bord. Da der kun er tre spillere med i spillet spiller vi ikke med visepræsident og -røvhul reglen.
+
+Selve kortspils delen af projektet er lavet i Rust, hvor af spillets regler også er implementeret. For at undgå at de forskellige AI's overholder reglerne, er der også blevet implementeret en funktion som skal tjekke om de forskellige træk som bliver lavet er lovlige. Og hvis de ikke er lovlige, så vil spillet bede den AI som lavede det ulovlige træk, om at lave et nyt træk, i et håb om at det så er et lovligt træk. Vi har valgt at lave de forskellige AI's i Rust og C++. 
+\\
+Vist under er der et digrammer over spillets game loop, samt et diagram over hvordan der bliver tjekket om trækket som AI'en laver er et validt træk.
+
+\subsection{AI strategier}
+
+
+
+\begin{figure}[H]
+	\centering
+	\input{Diagram1.tex}[width=0.5\linewidth]
+	\caption{Diagram 1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\input{Diagram2.tex}[width=0.5\linewidth]
+	\caption{Diagram 2}
+\end{figure}
+
+Diagram 1, er en visualisering over selve spillet samt loopet, som tjekker om der er flere kort der kan spilles.
+\bigbreak
+
+Diagram 2, er en visualisering over det loop som står for at næste spiller får sin tur, samt at trækkene er valide.
+
+\vfill
+\pagebreak
+
 
 \subsection{Rust}
 
@@ -141,7 +162,19 @@ Vi har analyseret regelerne og udvalgt enkelte regeler som vi føler ikke vil pa
 \vfill
 \pagebreak
 
+\section{Afprøvning}
+Ud over at teste strategierne mod hinanden valgte vi også at teste strategier mod sig selv, og gennem det fandt vi frem til at når alle spillere forsøger at smide så mange kort på en gang, så vil den der starter bunken 47\% af tiden, mens den som starter som nummer to i rækkefølgen har en chance for at vinde, som er på 32,7\%, og den der er nummer 3 har en chance for at vinde på 25\%. 
+Og tallene som er nævnt oven for er fra hvor man har kørt progammet 10.000.000 gange, så man har så mange simuleringer som muligt, det er dog muligt at køre flere simuleringer, men da det tager 30 sekunder at køre 10.000.000 simuleringer, bedømmede vi at det ikke var nødvendigt at teste flere gange.
+\\
+
+
 \section{Konklusion}
+Vi har gennem udviklingen af projektet fundet nogle ting som vi vil gøre anderledes, så som at skrive det hele i det samme programmeringssprog, da vi på den nuværende måde er bundet til hvad FFI er i stand til. Så hvis vi skulle lave det igen, vil vi have lavet det i Rust, hvor vi vil have brugt funktionen double linked list, så vi vil have været i stand til at tage data ud af listen, uanset hvor i listen den data, som man skulle bruge lå. I den nuværende udgave har vi i stedet for linked list brugt vektore, hvor vi mere er låst til kun at tage data ud af vektoren så længe dataen lægger som det første i vektoren.
+\\
+
+\bigbreak
+
+
 
 \vfill
 \pagebreak
