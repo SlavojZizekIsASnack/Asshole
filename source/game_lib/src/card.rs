@@ -2,13 +2,13 @@ use std::cmp::Ordering;
 use strum::IntoEnumIterator;
 
 #[repr(C)]
-#[derive(Debug, Clone, Copy, EnumIter, Display, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Clone, Copy, EnumIter, Display, PartialEq, Eq)]
 pub enum PlayType {
+	Clear,
 	Single,
 	Double,
 	Triple,
 	Quadruple,
-	Clear,
 }
 
 #[repr(C)]

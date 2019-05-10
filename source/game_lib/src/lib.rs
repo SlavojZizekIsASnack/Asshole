@@ -54,6 +54,8 @@ impl Game {
 		let number_of_players = self.players.len();
 
 		for player in &mut self.players {
+			// Loop here because a player can, potentially, make more
+			// than one move.
 			loop {
 				// Stores whether this player should play the next turn.
 				// This happens, for example, when they clear the board
@@ -61,13 +63,13 @@ impl Game {
 				let mut cleared_board = false;
 
 				// If we have had a round of passes, reset the field
-				if self.passes == number_of_players + 1 {
+				if self.passes >= number_of_players + 1 {
 					self.passes = 0;
 					self.top_card = None;
 					self.play_type = PlayType::Double;
 				}
 
-				// Actual player tick.
+				// Ask player for their move
 				let play = player.tick(
 					self.play_type,
 					// Instead of playing with null values, if the bottom
@@ -76,35 +78,37 @@ impl Game {
 						.unwrap_or(Card::new(Face::Three, Suit::Diamonds)),
 				);
 
-				// If it used to be a PlayType::Clear, we must know
-				// assign one, based on the players play.
+				// If it used to be a PlayType::Clear assign a new one,
+				// based on the players play.
 				if self.play_type == PlayType::Clear {
 					self.play_type = match play.len() {
 						// Same as a pass.
-						0 => {
-							self.passes += 1;
-							continue;
-						}
+						0 => return Err(TickError::PassOnClear),
 						1 => PlayType::Single,
 						2 => PlayType::Double,
 						3 => PlayType::Triple,
-						//
 						4 => PlayType::Quadruple,
 						// Played too many cards.
 						_ => return Err(IllegalNumberOfCards),
 					}
+				}
 
+				// If no cards played, pass.
+				if play.len() == 0 {
+					self.passes += 1;
+					continue;
 				}
 
 				// Compare PlayType to number of played cards.
 				// If not a match, illegal move.
-				if match self.play_type {
-					PlayType::Single => 1,
-					PlayType::Double => 2,
-					PlayType::Triple => 3,
-					PlayType::Clear => unreachable!(),
-				} != play.len()
-				{
+				if play.len()
+					!= match self.play_type {
+						PlayType::Single => 1,
+						PlayType::Double => 2,
+						PlayType::Triple => 3,
+						PlayType::Clear => unreachable!(),
+						_ => unreachable!(),
+					} {
 					return Err(WrongNumberOfCards);
 				}
 
@@ -145,14 +149,17 @@ impl Game {
 				self.play_type = PlayType::Clear;
 			}
 		}
-		println!();
+		// println!();
 		Ok(())
 	}
 }
 
+#[derive(Debug)]
 pub enum TickError {
 	// GameOver. (String) is the name of the winner.
 	GameOver(String),
+	// Pass on PlayType::Clear
+	PassOnClear,
 	// If `player` tries to play a card they don't have.
 	NoneExistingCard,
 	// If `player` tries to play, for example, three

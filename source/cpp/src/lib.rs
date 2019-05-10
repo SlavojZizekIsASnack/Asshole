@@ -24,6 +24,11 @@ struct Play {
 
 impl Play {
 	fn into_vec(self) -> Vec<libc::c_uint> {
-		vec![self.start]
+		let mut vec = vec![];
+		for i in 0..self.start {
+			vec.push(self.start + i);
+		}
+
+		vec
 	}
 }

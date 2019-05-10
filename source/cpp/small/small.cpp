@@ -37,10 +37,11 @@ struct Card
 
 enum PlayType
 {
+	Clear,
 	Single,
 	Double,
 	Triple,
-	Clear,
+	Quadruple,
 };
 
 template <class T>

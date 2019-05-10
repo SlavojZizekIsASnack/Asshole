@@ -16,3 +16,5 @@ libc = "0.2.49"
 
 cpp = { path = "cpp/"} 
 rust = { path = "rust/"}
+
+indicatif = "0.11.0"
