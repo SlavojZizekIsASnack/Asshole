@@ -72,12 +72,11 @@ Igennem denne opgave har vi arbejdet med kortspillet "Røvhul". Til spillet har 
 I forbindelse med det har vi selv identificeret 2 strategier hvortil vi har lavet 2 forskellige bots som hver følger deres strategi. Ud fra det konkluderer vi så hvilken strategi der er bedst.
 
 Opgaven vil gå igennem vores begrundelse for projektet i sektionen "Problemstilling", hvorefter vi forklare vores plan for selve projektet, samt de regler vi har valgt at programmere spillet ud fra i sektionen "Problemanalyse". 
-\bigbreak
+\\
 Derefter gennemgår vi brugsvejledningen til programmet i sektionen "Vejledning til Programmet"
-\bigbreak
+\\
 Til sidst vil vi i kapitlet "Dokumentation" komme ind på eksempler fra koden og forklare hvordan forskellige funktioner i koden fungerer og hvordan de bliver brugt. Vi vil også i dokumentationen beskrive hvordan de tre bots er udført i koden. Hvorefter vi vil teste koden med vores bots i "Afprøvning".
-\\
-\\
+\\ \\ \\ \\ 
 
 \section{Problemstilling}
 Der er i den moderne verden ikke nogen måde på effektivt at teste hvor god ens strategi til kortspillet røvhul er. Vi vil derfor udvikle en metode til at hurtigt og effektivt teste hvor god en strategi i røvhul er i forhold til andre strategier.
@@ -180,7 +179,7 @@ enum Face
 	Spades,
 };
 \end{minted}
-Funktionen "enum" tager tingene indeni og giver dem numre i den rækkefølge som de er placeret i. Det betyder at "Diamonds" har nummeret 1, "Clubs" har nummeret 2, og så videre hele vejen ned gennem funktionen.
+Funktionen "enum" tager tingene indeni funktionen og giver dem numre i den rækkefølge som de er placeret i. Det betyder at "Diamonds" har nummeret 1, "Clubs" har nummeret 2, og så videre hele vejen ned gennem funktionen.
 \bigbreak
 
 \begin{minted}{C++}
@@ -209,7 +208,6 @@ tick_unsafe(CVec<Card> c_hand, PlayType play_type, Card last_card)
 }
 \end{minted}
 "extern 'C'" er en del af CFFI, som tillader at vi er i stand til at få programmeringssprogende til at kommunikere med hinanden. I det at vi siger 'C' i funktionen, fortæller vi det som som skal modtage og forstå koden, at sproget som det er skrevet i er C.
-
 \vfill
 \pagebreak
 
