@@ -103,14 +103,15 @@ Der er et par forskellige regelsæt og der kan til tider være uenigheder om enk
     \item Målet i røvhul er at spille alle sine kort så man har nul kort tilbage i hånden.
     \item Den første person som har spillet alle sine kort og vinder spillet bliver kåret præsident. Den spiller som sidst har kort i hånden bliver kåret røvhul. Yderligere hvis mere end 3 spillere spiller på en gang bliver den anden første og anden sidste henholdsvist kåret vicepræsident og vicerøvhul.
     \item I første spil er det spilleren med klør tre som starter, dog behøver de ikke spille klør tre i første runde. I følgende spil er det røvhullet fra det tidligere spil som starter.
+    \\ \\ \\ \\
     \item Hver spiller skiftes til at ligge et kort ned på toppen af bunken i urets retning. Kortet man ligger ned skal altid være lig med eller højere end det øverste kort i bunken. 
     \item Det højeste kort er to efterfulgt af es, konge osv. ned til tre. Det gælder dog ikke 10 som rydder bunken og derfor er højere end to.
     \item Når bunken ryddes, kasseres alle kort i bunken og spillet fortsætter. Det er altid den spiller som sidst har lagt et kort i bunken som starter med at lægge et kort.
     \item Hvis der ikke er nogle kort i bunken må man spille et hvilket som helst kort. Yderligere er det tilladt at ligge to eller flere af det samme kort eks. to konger eller tre es. Hvis to eller flere kort bliver lagt i bunken på denne måde, skal alle følgende spillere lægge den samme mængde kort på bunken som også er ens og er lig med eller højere.
     \item Hvis to spiller ligger to ens kort i streg er det ikke tilladt at den tredje spiller ligger to ens kort i bunken.
     \item Hvis der på noget tidspunkt ligger fire ens kort i streg i bunken ryddes bunken.
-    \item Hvis man ikke kan, eller ikke vil spille et kort er det tilladt at sige pas, men hvis en spiller siger pas og bliver sprunget over vil de automatisk blive sprunget over ind til den nuværende bunke ryddes.
     \pagebreak
+    \item Hvis man ikke kan, eller ikke vil spille et kort er det tilladt at sige pas, men hvis en spiller siger pas og bliver sprunget over vil de automatisk blive sprunget over ind til den nuværende bunke ryddes.
     \item Når man begynder et spil efter det første spil eller efterfulgte spil er afsluttede skal røvhullet give sine to bedste/højeste kort hvor ti er højest så to, es osv. til præsidenten. Præsidenten skal derefter give to af sine kort til røvhullet og præsidenten må selv vælge hvilke to kort de giver. Alle kort gives med bagsiden opad. Hvis man spiller vicepræsident og -røvhul, gælder samme regel for dem, dog bytter de kun et kort. 
 \end{itemize}
 \bigbreak
@@ -171,12 +172,43 @@ fn main() {
 \subsection{C++}
 
 \begin{minted}{C++}
-main() {
-	using namespace std;
+enum Face
+{
+	Diamonds,
+	Clubs,
+	Hearts,
+	Spades,
+};
+\end{minted}
+Funktionen "enum" tager tingene indeni og giver dem numre i den rækkefølge som de er placeret i. Det betyder at "Diamonds" har nummeret 1, "Clubs" har nummeret 2, og så videre hele vejen ned gennem funktionen.
+\bigbreak
 
-	cout >> "Hello";
+\begin{minted}{C++}
+struct Card
+{
+	Face face;
+	Suit suit;
+};
+\end{minted}
+En struct er funktion, man kan bruge til at danne sine egne funktioner som man så er i stand til at kalde senere i sit program. På den måde kan man lave nogle komplicerede funktioner, som normalt ikke vil være en del af C++.
+\pagebreak
+
+\begin{minted}{C++}
+extern "C" Play
+tick_unsafe(CVec<Card> c_hand, PlayType play_type, Card last_card)
+{
+	vector<Card> hand;
+	hand = c_hand.to_vec();
+
+	Play play;
+
+	play.start = 5;
+	play.length = 1;
+
+	return play;
 }
 \end{minted}
+"extern 'C'" er en del af CFFI, som tillader at vi er i stand til at få programmeringssprogende til at kommunikere med hinanden. I det at vi siger 'C' i funktionen, fortæller vi det som som skal modtage og forstå koden, at sproget som det er skrevet i er C.
 
 \vfill
 \pagebreak
